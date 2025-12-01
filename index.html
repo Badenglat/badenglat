@@ -867,7 +867,13 @@
 
             <div class="contact-form-wrapper fade-in-right">
                 <h4>Send Me a Message</h4>
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true"
+                    netlify-honeypot="bot-field">
+                    <!-- Netlify Forms hidden fields -->
+                    <input type="hidden" name="form-name" value="contact">
+                    <p style="display:none;">
+                        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                    </p>
                     <div class="form-row">
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder=" " required>
@@ -914,6 +920,15 @@
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS - Replace 'YOUR_PUBLIC_KEY' with your actual public key from EmailJS
+        // Get it from: https://dashboard.emailjs.com/admin/account
+        emailjs.init('YOUR_PUBLIC_KEY_HERE');
+    </script>
 
     <script src="js/script.js"></script>
 </body>
