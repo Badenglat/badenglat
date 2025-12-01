@@ -28,3 +28,11 @@ Thumbs.db
 # Build output
 dist/
 build/
+
+# ==========================================
+# ADMIN PANEL - PRIVATE (Local Access Only)
+# ==========================================
+# Keep admin panel private and accessible only on local machine
+admin/
+js/admin-script.js
+css/admin-styles.css
