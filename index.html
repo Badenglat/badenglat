@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badeng Lat| IT Student Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p class="loader-text">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">BL</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+                <a href="#contact" class="nav-cta">Hire Me</a>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-graduation-cap"></i>
+                    Information Technology Student
+                </div>
+                <h1 class="hero-title">
+                    Hi, I'm <span class="gradient-text">Badeng Lat</span>
+                </h1>
+                <div class="typing-container">
+                    <span class="typed-text" id="typed"></span>
+                    <span class="cursor"></span>
+                </div>
+                <p class="hero-description">
+                    A passionate Information Technology student at the University of Juba, College of Computer Science &
+                    Information Technology. With specialization to be in computer networks, artificial intelligence and
+                    building modern web & apps and exploring innovative technologies.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-folder-open"></i>
+                        View Projects
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Contact Me
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number counter" data-target="10">0</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number counter" data-target="15">0</div>
+                        <div class="stat-label">Technologies</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number counter" data-target="3">0</div>
+                        <div class="stat-label">Years Learning</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-bg"></div>
+                    <!-- ============================================
+                         HERO PROFILE IMAGE - Replace with your image
+                         ============================================ -->
+                    <div class="hero-profile-img">
+                        <!-- Option 1: Using an image file -->
+                        <img src="images/badeng.jpg" alt="Badeng Lat Gatluak - IT Student">
+
+                        <!-- Option 2: If image doesn't load, show icon as fallback -->
+                        <!-- The CSS will handle showing the icon if image fails -->
+                    </div>
+                    <div class="floating-icons">
+                        <div class="floating-icon">
+                            <i class="fab fa-python" style="color: #3776ab;"></i>
+                        </div>
+                        <div class="floating-icon">
+                            <i class="fab fa-js" style="color: #f7df1e;"></i>
+                        </div>
+                        <div class="floating-icon">
+                            <i class="fab fa-react" style="color: #61dafb;"></i>
+                        </div>
+                        <div class="floating-icon">
+                            <i class="fas fa-database" style="color: #47a248;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header fade-in">
+            <span class="section-subtitle">
+                <i class="fas fa-user"></i>
+                About Me
+            </span>
+            <h2 class="section-title">Know Me Better</h2>
+            <p class="section-description">
+                Discover my journey, passion, and dedication to technology and innovation.
+            </p>
+        </div>
+        <div class="about-container">
+            <div class="about-image fade-in-left">
+                <div class="about-img-wrapper">
+                    <!-- ============================================
+                         ABOUT SECTION IMAGE - Replace with your image
+                         ============================================ -->
+                    <div class="about-img">
+                        <!-- Option 1: Using an image file -->
+                        <img src="images/Badeng.JPG" alt="Badeng Lat Gatluak - About Me">
+
+                        <!-- Option 2: Fallback icon if image doesn't exist -->
+                        <!-- <i class="fas fa-user-graduate"></i> -->
+                    </div>
+                </div>
+                <div class="about-experience-badge">
+                    <div class="number">4+</div>
+                    <div class="text">Years of Learning</div>
+                </div>
+            </div>
+            <div class="about-content fade-in-right">
+                <h3>A Passionate IT Student Based in Juba, South Sudan</h3>
+                <p>
+                    I'm Badeng Lat Gatluak, a dedicated Information Technology student at the University of Juba. My
+                    journey in technology began with curiosity and has evolved into a deep passion for creating
+                    innovative solutions through code.
+                </p>
+                <p>
+                    I believe in continuous learning and staying updated with the latest technologies. My goal is to
+                    leverage technology to solve real-world problems and contribute to the tech ecosystem in South Sudan
+                    and beyond.
+                </p>
+                <div class="about-info">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="info-text">
+                            <span>Name</span>
+                            <h4>Badeng Lat Gatluak</h4>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-text">
+                            <span>Email</span>
+                            <h4>badenglat@gmail.com</h4>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-text">
+                            <span>Location</span>
+                            <h4>Mangateen Juba, South Sudan</h4>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="info-text">
+                            <span>Hon.Degree</span>
+                            <h4><b class="It">HD.IT</b>. Computer Science & Information Technology</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="counter-grid">
+                    <div class="counter-item scale-in">
+                        <div class="counter-number counter" data-target="10">0</div>
+                        <div class="counter-label">Projects</div>
+                    </div>
+                    <div class="counter-item scale-in">
+                        <div class="counter-number counter" data-target="15">0</div>
+                        <div class="counter-label">Skills</div>
+                    </div>
+                    <div class="counter-item scale-in">
+                        <div class="counter-number counter" data-target="500">0</div>
+                        <div class="counter-label">Hours Coding</div>
+                    </div>
+                    <div class="counter-item scale-in">
+                        <div class="counter-number counter" data-target="5">0</div>
+                        <div class="counter-label">Certificates</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="skills-container">
+            <div class="section-header fade-in">
+                <span class="section-subtitle">
+                    <i class="fas fa-code"></i>
+                    My Skills
+                </span>
+                <h2 class="section-title">Technical Expertise</h2>
+                <p class="section-description">
+                    A comprehensive overview of my technical skills and proficiencies in various technologies.
+                </p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Frontend Development</h3>
+                    <p>Building responsive and interactive user interfaces with modern technologies.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Dart</span>
+                    </div>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon gradient-2">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Backend Development</h3>
+                    <p>Creating robust server-side applications and RESTful APIs.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Express</span>
+                        <span class="skill-tag">PHP</span>
+                    </div>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon gradient-3">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Database Management</h3>
+                    <p>Designing and managing databases for efficient data storage.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Firebase</span>
+                    </div>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Development</h3>
+                    <p>Developing cross-platform mobile applications.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Kotlin</span>
+                    </div>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon gradient-2">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Tools & Technologies</h3>
+                    <p>Utilizing modern development tools and version control.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon gradient-3">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Creating user-centered designs with attention to detail.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Adobe XD</span>
+                        <span class="skill-tag">Photoshop</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-section fade-in">
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-title">
+                            <i class="fab fa-python" style="color: #3776ab;"></i>
+                            Python
+                        </span>
+                        <span class="progress-percentage">90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-title">
+                            <i class="fab fa-js" style="color: #f7df1e;"></i>
+                            JavaScript
+                        </span>
+                        <span class="progress-percentage">85%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-title">
+                            <i class="fab fa-react" style="color: #61dafb;"></i>
+                            React
+                        </span>
+                        <span class="progress-percentage">80%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="80"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-title">
+                            <i class="fas fa-database" style="color: #47a248;"></i>
+                            Database
+                        </span>
+                        <span class="progress-percentage">75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="75"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="projects-container">
+            <div class="section-header fade-in">
+                <span class="section-subtitle">
+                    <i class="fas fa-folder-open"></i>
+                    My Projects
+                </span>
+                <h2 class="section-title">Recent Works</h2>
+                <p class="section-description">
+                    Explore my portfolio of projects showcasing my skills and creativity.
+                </p>
+            </div>
+
+            <div class="filter-buttons fade-in">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="uiux">UI/UX</button>
+                <button class="filter-btn" data-filter="research">Research</button>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project 1 -->
+                <div class="project-card fade-in" data-category="web">
+                    <div class="project-image">
+                        <!-- ============================================
+                             PROJECT IMAGE - Replace with your project screenshot
+                             ============================================ -->
+                        <div class="project-img">
+                            <!-- Option 1: Using an image file -->
+                            <!-- <img src="images/projects/ecommerce.jpg" alt="E-Commerce Platform"> -->
+
+                            <!-- Option 2: Icon placeholder -->
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link" data-modal="project1">
+                                <i class="fas fa-expand"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Web Development</span>
+                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <p class="project-description">A full-featured online shopping platform with cart, checkout, and
+                            payment integration.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card fade-in" data-category="mobile">
+                    <div class="project-image">
+                        <div class="project-img gradient-2">
+                            <!-- <img src="images/projects/taskapp.jpg" alt="Task Management App"> -->
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link" data-modal="project2">
+                                <i class="fas fa-expand"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Mobile App</span>
+                        <h3 class="project-title">Task Management App</h3>
+                        <p class="project-description">A productivity app for managing tasks, setting reminders, and
+                            tracking progress.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Dart</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card fade-in" data-category="web">
+                    <div class="project-image">
+                        <div class="project-img gradient-3">
+                            <!-- <img src="images/projects/lms.jpg" alt="Learning Management System"> -->
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link" data-modal="project3">
+                                <i class="fas fa-expand"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Web Development</span>
+                        <h3 class="project-title">Learning Management System</h3>
+                        <p class="project-description">An educational platform for online courses with video streaming
+                            and quizzes.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card fade-in" data-category="uiux">
+                    <div class="project-image">
+                        <div class="project-img">
+                            <!-- <img src="images/projects/banking.jpg" alt="Banking App Redesign"> -->
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link" data-modal="project4">
+                                <i class="fas fa-expand"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">UI/UX Design</span>
+                        <h3 class="project-title">Banking App Redesign</h3>
+                        <p class="project-description">Modern UI/UX design concept for a mobile banking application.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">Prototyping</span>
+                            <span class="tech-tag">User Research</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card fade-in" data-category="research">
+                    <div class="project-image">
+                        <div class="project-img gradient-2">
+                            <!-- <img src="images/projects/ml-healthcare.jpg" alt="ML in Healthcare"> -->
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link" data-modal="project5">
+                                <i class="fas fa-expand"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-file-pdf"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Research</span>
+                        <h3 class="project-title">ML in Healthcare</h3>
+                        <p class="project-description">Research paper on applying machine learning for disease
+                            prediction.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">Research</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card fade-in" data-category="web">
+                    <div class="project-image">
+                        <div class="project-img gradient-3">
+                            <!-- <img src="images/projects/blog.jpg" alt="Tech Blog Platform"> -->
+                            <i class="fas fa-blog"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link" data-modal="project6">
+                                <i class="fas fa-expand"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Web Development</span>
+                        <h3 class="project-title">Tech Blog Platform</h3>
+                        <p class="project-description">A blogging platform for tech enthusiasts with markdown support.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Project Details</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <div class="education-container">
+            <div class="section-header fade-in">
+                <span class="section-subtitle">
+                    <i class="fas fa-graduation-cap"></i>
+                    My Education
+                </span>
+                <h2 class="section-title">Academic Journey</h2>
+                <p class="section-description">
+                    My educational background and academic achievements at University of Juba.
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">
+                            <i class="fas fa-calendar"></i>
+                            2021 - Present
+                        </span>
+                        <h3 class="timeline-title">Honours Degree of Information Technology in Computer Science &
+                            Information Technology</h3>
+                        <p class="timeline-institution">
+                            <i class="fas fa-university"></i>
+                            University of Juba - College of Computer Science & IT
+                        </p>
+                        <p class="timeline-description">
+                            Pursuing a comprehensive Honours degree in Information Technology with focus on software
+                            development,
+                            data structures, algorithms, Networking and modern web technologies. Actively participating
+                            in
+                            coding competitions and tech community events.
+                        </p>
+                        <div class="timeline-courses">
+                            <span class="course-tag">Data Structures</span>
+                            <span class="course-tag">Algorithms</span>
+                            <span class="course-tag">Database Systems</span>
+                            <span class="course-tag">Networking</span>
+                            <span class="course-tag">Web Development</span>
+                            <span class="course-tag">Software Engineering</span>
+                            <span class="course-tag">Computer Networks</span>
+                            <span class="course-tag">Manage All Projects</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">
+                            <i class="fas fa-calendar"></i>
+                            2022
+                        </span>
+                        <h3 class="timeline-title">Computer Networks Certification</h3>
+                        <p class="timeline-institution">
+                            <i class="fas fa-certificate"></i>
+                            Online Learning Platform
+                        </p>
+                        <p class="timeline-description">
+                            Completed comprehensive Computer Networking course covering modern networking Installing and
+                            troubleshooting technologies.
+                        </p>
+                        <div class="timeline-courses">
+                            <span class="course-tag">Basics of Networking</span>
+                            <span class="course-tag">Wireless Installation</span>
+                            <span class="course-tag">Maintenance</span>
+                            <span class="course-tag">Troubleshooting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">
+                            <i class="fas fa-calendar"></i>
+                            2023
+                        </span>
+                        <h3 class="timeline-title">Web and Mobile Development Certification</h3>
+                        <p class="timeline-institution">
+                            <i class="fas fa-certificate"></i>
+                            Online Learning Platform
+                        </p>
+                        <p class="timeline-description">
+                            Completed comprehensive web development course covering modern frontend and backend
+                            technologies,
+                            including Flutter, React, Node.js, and database management.
+                        </p>
+                        <div class="timeline-courses">
+                            <span class="course-tag">Flutter</span>
+                            <span class="course-tag">Dart</span>
+                            <span class="course-tag">Android Studio</span>
+                            <span class="course-tag">React.js</span>
+                            <span class="course-tag">Node.js</span>
+                            <span class="course-tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">
+                            <i class="fas fa-calendar"></i>
+                            2024
+                        </span>
+                        <h3 class="timeline-title">Database Management System Certification</h3>
+                        <p class="timeline-institution">
+                            <i class="fas fa-certificate"></i>
+                            Online Learning Platform
+                        </p>
+                        <p class="timeline-description">
+                            Completed comprehensive database management System course covering modern Database
+                            Management System
+                            technologies,
+                            including MySQL, MongoDB, and PostgreSQL.
+                        </p>
+                        <div class="timeline-courses">
+                            <span class="course-tag">MySQL</span>
+                            <span class="course-tag">MongoDB</span>
+                            <span class="course-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">
+                            <i class="fas fa-calendar"></i>
+                            2025
+                        </span>
+                        <h3 class="timeline-title">Artificial Intelligence Certification</h3>
+                        <p class="timeline-institution">
+                            <i class="fas fa-certificate"></i>
+                            UOJ Learning Platform
+                        </p>
+                        <p class="timeline-description">
+                            Completed comprehensive Artificial Intelligence course covering modern artificial
+                            intelligence
+                            technologies,
+                            including Deep Learning, Machine Learning, and natural networks and more.
+                        </p>
+                        <div class="timeline-courses">
+                            <span class="course-tag">Deep Learning</span>
+                            <span class="course-tag">Machine Learning</span>
+                            <span class="course-tag">neural networks</span>
+                            <span class="course-tag">and more</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">
+                            <i class="fas fa-calendar"></i>
+                            2018 - 2019
+                        </span>
+                        <h3 class="timeline-title">Secondary School Certificate</h3>
+                        <p class="timeline-institution">
+                            <i class="fas fa-school"></i>
+                            Mate Secondary School
+                        </p>
+                        <p class="timeline-description">
+                            Completed secondary education with strong focus on mathematics and sciences,
+                            laying the foundation for pursuing Information Technology studies.
+                        </p>
+                        <div class="timeline-courses">
+                            <span class="course-tag">Mathematics</span>
+                            <span class="course-tag">Physics</span>
+                            <span class="course-tag">Chemistry</span>
+                            <span class="course-tag">Biology</span>
+                            <span class="course-tag">Agriculture</span>
+                            <span class="course-tag">English</span>
+                            <span class="course-tag">CRE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info fade-in-left">
+                <h3>Let's Work Together</h3>
+                <p>
+                    Have a project in mind or want to collaborate? Feel free to reach out to me.
+                    I'm always open to discussing new opportunities and ideas.
+                </p>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>badenglat@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Phone</h4>
+                        <p>+211 917089898 / 0922990744</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Location</h4>
+                        <p>Mangateen Juba, South Sudan</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/badenglat" class="social-link" aria-label="GitHub" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/badenglat" class="social-link" aria-label="LinkedIn"
+                        target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://twitter.com/badenglat" class="social-link" aria-label="Twitter" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com/badenglat" class="social-link" aria-label="Instagram"
+                        target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com/badenglat" class="social-link" aria-label="Tiktok" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://facebook.com/badenglat" class="social-link" aria-label="Facebook" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper fade-in-right">
+                <h4>Send Me a Message</h4>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder=" " required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder=" " required>
+                            <label for="email">Your Email</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder=" " required>
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder=" " required></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p class="footer-text">
+                © 2025 <span>Badeng Lat</span>. All Rights Reserved.
+            </p>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

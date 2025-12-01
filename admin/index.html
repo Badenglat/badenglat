@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Badeng Lat Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/admin-styles.css">
+</head>
+
+<body>
+    <!-- ==========================================
+         Login Modal
+         ========================================== -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-logo">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2>Admin Login</h2>
+                <p>Enter your credentials to access the dashboard</p>
+            </div>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="username" name="username" placeholder="Enter username" required
+                            autocomplete="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Enter password" required
+                            autocomplete="current-password">
+                        <button type="button" class="toggle-password" id="togglePassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+                <div class="login-error" id="loginError">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Invalid username or password</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal (Outside Login Container) -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h3>Forgot Password</h3>
+                <button class="modal-close" data-close="forgotPasswordModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1rem; color: var(--admin-text-secondary);">
+                    Enter your email address and we'll send you a link to reset your password.
+                </p>
+                <form id="forgotPasswordForm">
+                    <div class="form-group">
+                        <label for="forgotEmail">Email Address</label>
+                        <input type="email" id="forgotEmail" name="email" placeholder="badenglat@gmail.com" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-close="forgotPasswordModal">Cancel</button>
+                <button type="submit" class="btn btn-primary" form="forgotPasswordForm">
+                    <i class="fas fa-paper-plane"></i> Send Reset Link
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         Admin Panel Container
+         ========================================== -->
+    <div class="admin-panel" id="adminPanel">
+
+        <!-- ==========================================
+             Sidebar Navigation
+             ========================================== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    <span>BL Admin</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <img src="../images/badeng-profile.jpg" alt="Admin" id="sidebarAvatar"
+                        onerror="this.src='https://ui-avatars.com/api/?name=Badeng+Lat&background=6366f1&color=fff'">
+                    <span class="status-indicator online"></span>
+                </div>
+                <div class="user-info">
+                    <h4>Badeng Lat</h4>
+                    <span>Administrator</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#dashboard" data-page="dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#projects" data-page="projects">
+                            <i class="fas fa-folder-open"></i>
+                            <span>Projects</span>
+                            <span class="badge">6</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills" data-page="skills">
+                            <i class="fas fa-code"></i>
+                            <span>Skills</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#education" data-page="education">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Education</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#messages" data-page="messages">
+                            <i class="fas fa-envelope"></i>
+                            <span>Messages</span>
+                            <span class="badge new">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#analytics" data-page="analytics">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#profile" data-page="profile">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" data-page="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../index.html" class="view-site" target="_blank" id="viewWebsiteLink">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>View Website</span>
+                </a>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ==========================================
+             Main Content Area
+             ========================================== -->
+        <main class="main-content">
+
+            <!-- Top Header Bar -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search..." id="globalSearch">
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="header-btn theme-toggle" id="adminThemeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="notification-wrapper">
+                        <button class="header-btn notification-btn" id="notificationBtn" aria-label="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">5</span>
+                        </button>
+                        <div class="header-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h4>Notifications</h4>
+                                <a href="#" id="markAllRead">Mark all as read</a>
+                            </div>
+                            <div class="dropdown-body">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon blue">
+
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-icon blue">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="#messages" data-page="messages">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-menu-wrapper">
+                        <div class="user-menu" id="userMenu">
+                            <img src="../images/badeng-profile.jpg" alt="Admin"
+                                onerror="this.src='https://ui-avatars.com/api/?name=Badeng+Lat&background=6366f1&color=fff'">
+                            <span>Badeng</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="header-dropdown user-dropdown" id="userDropdown">
+                            <div class="dropdown-user-info">
+                                <img src="../images/badeng-profile.jpg" alt="Admin"
+                                    onerror="this.src='https://ui-avatars.com/api/?name=Badeng+Lat&background=6366f1&color=fff'">
+                                <div>
+                                    <h4>Badeng Lat</h4>
+                                    <p>badenglat@gmail.com</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <a href="#profile" data-page="profile">
+                                <i class="fas fa-user"></i> My Profile
+                            </a>
+                            <a href="#settings" data-page="settings">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <a href="../index.html" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> View Website
+                            </a>
+                            <hr>
+                            <a href="#" id="dropdownLogout" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ==========================================
+                 Page Content Container
+                 ========================================== -->
+            <div class="page-content">
+
+                <!-- ==========================================
+                     Dashboard Page
+                     ========================================== -->
+                <div class="page active" id="dashboardPage">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Dashboard</h1>
+                            <p>Welcome back, Badeng! Here's what's happening with your portfolio.</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary" id="refreshDashboard">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                            <button class="btn btn-primary" id="addNewProjectBtn">
+                                <i class="fas fa-plus"></i> Add Project
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 class="stat-number counter" data-target="12458">0</h3>
+                                <p class="stat-label">Total Visitors</p>
+                                <span class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> 12.5% from last month
+                                </span>
+                            </div>
+                            <div class="stat-chart">
+                                <canvas id="visitorsSparkline"></canvas>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon green">
+                                <i class="fas fa-folder-open"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 class="stat-number counter" data-target="6">0</h3>
+                                <p class="stat-label">Total Projects</p>
+                                <span class="stat-change positive">
+                                    <i class="fas fa-plus"></i> 2 new this month
+                                </span>
+                            </div>
+                            <div class="stat-chart">
+                                <canvas id="projectsSparkline"></canvas>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon purple">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 class="stat-number counter" data-target="24">0</h3>
+                                <p class="stat-label">Total Messages</p>
+                                <span class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> 3 unread
+                                </span>
+                            </div>
+                            <div class="stat-chart">
+                                <canvas id="messagesSparkline"></canvas>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 class="stat-number">2:34</h3>
+                                <p class="stat-label">Avg. Session (min)</p>
+                                <span class="stat-change negative">
+                                    <i class="fas fa-arrow-down"></i> 5.2% from last month
+                                </span>
+                            </div>
+                            <div class="stat-chart">
+                                <canvas id="sessionSparkline"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-area"></i> Visitor Analytics</h3>
+                                <div class="card-actions">
+                                    <select id="visitorPeriod" class="chart-select">
+                                        <option value="7">Last 7 Days</option>
+                                        <option value="30" selected>Last 30 Days</option>
+                                        <option value="90">Last 90 Days</option>
+                                        <option value="365">Last Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="visitorChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-pie"></i> Traffic Sources</h3>
+                                <div class="card-actions">
+                                    <button class="btn-icon" title="More options">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="trafficChart"></canvas>
+                                <div class="chart-legend" id="trafficLegend">
+                                    <!-- Legend will be populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity & Messages -->
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-envelope"></i> Recent Messages</h3>
+                                <a href="#messages" class="view-all" data-page="messages">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="message-list" id="recentMessagesList">
+                                    <div class="message-item unread">
+                                        <div class="message-avatar">
+                                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=6366f1&color=fff"
+                                                alt="John Doe">
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-header">
+                                                <h4>Kom Wuor</h4>
+                                                <span class="message-time">2 min ago</span>
+                                            </div>
+                                            <p class="message-subject">Project Inquiry</p>
+                                            <p class="message-preview">Hi, I'm interested in hiring you for a web
+                                                development project...</p>
+                                        </div>
+                                        <div class="message-actions">
+                                            <button class="action-btn" title="Reply">
+                                                <i class="fas fa-reply"></i>
+                                            </button>
+                                            <button class="action-btn" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="message-item unread">
+                                        <div class="message-avatar">
+                                            <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=ec4899&color=fff"
+                                                alt="Jane Smith">
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-header">
+                                                <h4>Kiir Hassan Hassan</h4>
+                                                <span class="message-time">1 hour ago</span>
+                                            </div>
+                                            <p class="message-subject">Collaboration Request</p>
+                                            <p class="message-preview">Great portfolio! Would love to discuss a
+                                                collaboration...</p>
+                                        </div>
+                                        <div class="message-actions">
+                                            <button class="action-btn" title="Reply">
+                                                <i class="fas fa-reply"></i>
+                                            </button>
+                                            <button class="action-btn" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="message-item">
+                                        <div class="message-avatar">
+                                            <img src="https://ui-avatars.com/api/?name=Tech+Corp&background=10b981&color=fff"
+                                                alt="Tech Corp">
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-header">
+                                                <h4>Bol Joseph</h4>
+                                                <span class="message-time">3 hours ago</span>
+                                            </div>
+                                            <p class="message-subject">Internship Opportunity</p>
+                                            <p class="message-preview">We have an internship opportunity that might
+                                                interest you...</p>
+                                        </div>
+                                        <div class="message-actions">
+                                            <button class="action-btn" title="Reply">
+                                                <i class="fas fa-reply"></i>
+                                            </button>
+                                            <button class="action-btn" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                                <a href="#" class="view-all">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list" id="recentActivityList">
+                                    <div class="activity-item">
+                                        <div class="activity-icon blue">
+                                            <i class="fas fa-folder-plus"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Added new project <strong>"E-Commerce Platform"</strong></p>
+                                            <span>2 hours ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon green">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Updated skill <strong>"React.js"</strong> to 85%</p>
+                                            <span>5 hours ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon purple">
+                                            <i class="fas fa-envelope-open"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Replied to message from <strong>Tech Corp</strong></p>
+                                            <span>1 day ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon orange">
+                                            <i class="fas fa-user-edit"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Updated profile information</p>
+                                            <span>2 days ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon red">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Deleted old project <strong>"Test Project"</strong></p>
+                                            <span>3 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects Overview Table -->
+                    <div class="dashboard-card full-width">
+                        <div class="card-header">
+                            <h3><i class="fas fa-folder-open"></i> Projects Overview</h3>
+                            <a href="#projects" class="view-all" data-page="projects">Manage All Projects</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="data-table" id="projectsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" id="selectAllProjects">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </th>
+                                            <th>Project</th>
+                                            <th>Category</th>
+                                            <th>Status</th>
+                                            <th>Views</th>
+                                            <th>Date Created</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" class="project-checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="project-info">
+                                                    <div class="project-thumb"
+                                                        style="background: linear-gradient(135deg, #6366f1, #ec4899);">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </div>
+                                                    <div class="project-details">
+                                                        <span class="project-name">E-Commerce Platform</span>
+                                                        <span class="project-tech">React, Node.js, MongoDB</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="category-badge web">Web</span></td>
+                                            <td><span class="status-badge active">Active</span></td>
+                                            <td>
+                                                <div class="views-info">
+                                                    <span>1,234</span>
+                                                    <span class="views-change positive">+12%</span>
+                                                </div>
+                                            </td>
+                                            <td>Jan 15, 2025</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="action-btn edit" title="Edit" data-id="1">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="action-btn view" title="View" data-id="1">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="action-btn delete" title="Delete" data-id="1">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" class="project-checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="project-info">
+                                                    <div class="project-thumb"
+                                                        style="background: linear-gradient(135deg, #06b6d4, #6366f1);">
+                                                        <i class="fas fa-tasks"></i>
+                                                    </div>
+                                                    <div class="project-details">
+                                                        <span class="project-name">Task Management App</span>
+                                                        <span class="project-tech">Flutter, Firebase, Dart</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="category-badge mobile">Mobile</span></td>
+                                            <td><span class="status-badge active">Active</span></td>
+                                            <td>
+                                                <div class="views-info">
+                                                    <span>856</span>
+                                                    <span class="views-change positive">+8%</span>
+                                                </div>
+                                            </td>
+                                            <td>Jan 10, 2025</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="action-btn edit" title="Edit" data-id="2">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="action-btn view" title="View" data-id="2">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="action-btn delete" title="Delete" data-id="2">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" class="project-checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="project-info">
+                                                    <div class="project-thumb"
+                                                        style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                                                        <i class="fas fa-graduation-cap"></i>
+                                                    </div>
+                                                    <div class="project-details">
+                                                        <span class="project-name">Learning Management System</span>
+                                                        <span class="project-tech">Django, PostgreSQL, Bootstrap</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="category-badge web">Web</span></td>
+                                            <td><span class="status-badge draft">Draft</span></td>
+                                            <td>
+                                                <div class="views-info">
+                                                    <span>0</span>
+                                                    <span class="views-change">-</span>
+                                                </div>
+                                            </td>
+                                            <td>Jan 5, 2025</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="action-btn edit" title="Edit" data-id="3">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="action-btn view" title="View" data-id="3">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="action-btn delete" title="Delete" data-id="3">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" class="project-checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="project-info">
+                                                    <div class="project-thumb"
+                                                        style="background: linear-gradient(135deg, #6366f1, #ec4899);">
+                                                        <i class="fas fa-credit-card"></i>
+                                                    </div>
+                                                    <div class="project-details">
+                                                        <span class="project-name">Banking App Redesign</span>
+                                                        <span class="project-tech">Figma, Prototyping</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="category-badge uiux">UI/UX</span></td>
+                                            <td><span class="status-badge active">Active</span></td>
+                                            <td>
+                                                <div class="views-info">
+                                                    <span>542</span>
+                                                    <span class="views-change positive">+15%</span>
+                                                </div>
+                                            </td>
+                                            <td>Dec 28, 2024</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="action-btn edit" title="Edit" data-id="4">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="action-btn view" title="View" data-id="4">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="action-btn delete" title="Delete" data-id="4">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" class="project-checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="project-info">
+                                                    <div class="project-thumb"
+                                                        style="background: linear-gradient(135deg, #06b6d4, #6366f1);">
+                                                        <i class="fas fa-brain"></i>
+                                                    </div>
+                                                    <div class="project-details">
+                                                        <span class="project-name">ML in Healthcare</span>
+                                                        <span class="project-tech">Python, TensorFlow, Research</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="category-badge research">Research</span></td>
+                                            <td><span class="status-badge active">Active</span></td>
+                                            <td>
+                                                <div class="views-info">
+                                                    <span>321</span>
+                                                    <span class="views-change positive">+5%</span>
+                                                </div>
+                                            </td>
+                                            <td>Dec 20, 2024</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="action-btn edit" title="Edit" data-id="5">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="action-btn view" title="View" data-id="5">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="action-btn delete" title="Delete" data-id="5">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" class="project-checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="project-info">
+                                                    <div class="project-thumb"
+                                                        style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                                                        <i class="fas fa-blog"></i>
+                                                    </div>
+                                                    <div class="project-details">
+                                                        <span class="project-name">Tech Blog Platform</span>
+                                                        <span class="project-tech">Vue.js, Express, MySQL</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="category-badge web">Web</span></td>
+                                            <td><span class="status-badge active">Active</span></td>
+                                            <td>
+                                                <div class="views-info">
+                                                    <span>678</span>
+                                                    <span class="views-change negative">-3%</span>
+                                                </div>
+                                            </td>
+                                            <td>Dec 15, 2024</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="action-btn edit" title="Edit" data-id="6">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="action-btn view" title="View" data-id="6">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="action-btn delete" title="Delete" data-id="6">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-footer">
+                                <div class="table-info">
+                                    Showing <strong>1-6</strong> of <strong>6</strong> projects
+                                </div>
+                                <div class="table-pagination">
+                                    <button class="pagination-btn" disabled>
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button class="pagination-btn active">1</button>
+                                    <button class="pagination-btn" disabled>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions & System Info -->
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="quick-actions-grid">
+                                    <button class="quick-action-btn" data-action="add-project">
+                                        <div class="action-icon blue">
+                                            <i class="fas fa-folder-plus"></i>
+                                        </div>
+                                        <span>Add Project</span>
+                                    </button>
+                                    <button class="quick-action-btn" data-action="add-skill">
+                                        <div class="action-icon green">
+                                            <i class="fas fa-plus-circle"></i>
+                                        </div>
+                                        <span>Add Skill</span>
+                                    </button>
+                                    <button class="quick-action-btn" data-action="view-messages">
+                                        <div class="action-icon purple">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <span>View Messages</span>
+                                    </button>
+                                    <button class="quick-action-btn" data-action="edit-profile">
+                                        <div class="action-icon orange">
+                                            <i class="fas fa-user-edit"></i>
+                                        </div>
+                                        <span>Edit Profile</span>
+                                    </button>
+                                    <button class="quick-action-btn" data-action="view-analytics">
+                                        <div class="action-icon red">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </div>
+                                        <span>Analytics</span>
+                                    </button>
+                                    <button class="quick-action-btn" data-action="export-data">
+                                        <div class="action-icon teal">
+                                            <i class="fas fa-download"></i>
+                                        </div>
+                                        <span>Export Data</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-server"></i> System Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="system-info-list">
+                                    <div class="system-info-item">
+                                        <span class="info-label">Portfolio Version</span>
+                                        <span class="info-value">1.0.0</span>
+                                    </div>
+                                    <div class="system-info-item">
+                                        <span class="info-label">Last Updated</span>
+                                        <span class="info-value">Jan 20, 2025</span>
+                                    </div>
+                                    <div class="system-info-item">
+                                        <span class="info-label">Server Status</span>
+                                        <span class="info-value status-online">
+                                            <i class="fas fa-circle"></i> Online
+                                        </span>
+                                    </div>
+                                    <div class="system-info-item">
+                                        <span class="info-label">Storage Used</span>
+                                        <span class="info-value">45.2 MB / 100 MB</span>
+                                    </div>
+                                    <div class="system-info-item">
+                                        <span class="info-label">Database</span>
+                                        <span class="info-value">Local Storage</span>
+                                    </div>
+                                    <div class="system-info-item storage-bar">
+                                        <div class="storage-progress">
+                                            <div class="storage-fill" style="width: 45%"></div>
+                                        </div>
+                                        <span>45% used</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     Projects Page
+                     ========================================== -->
+                <div class="page" id="projectsPage">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Manage Projects</h1>
+                            <p>Add, edit, or remove projects from your portfolio.</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary" id="importProjects">
+                                <i class="fas fa-upload"></i> Import
+                            </button>
+                            <button class="btn btn-secondary" id="exportProjects">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                            <button class="btn btn-primary" id="addProjectBtn">
+                                <i class="fas fa-plus"></i> Add New Project
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filter Bar -->
+                    <div class="filter-bar">
+                        <div class="filter-left">
+                            <div class="filter-search">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Search projects..." id="projectSearch">
+                            </div>
+                        </div>
+                        <div class="filter-right">
+                            <select id="categoryFilter" class="filter-select">
+                                <option value="">All Categories</option>
+                                <option value="web">Web Development</option>
+                                <option value="mobile">Mobile App</option>
+                                <option value="uiux">UI/UX Design</option>
+                                <option value="research">Research</option>
+                            </select>
+                            <select id="statusFilter" class="filter-select">
+                                <option value="">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="draft">Draft</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="grid" title="Grid View">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="view-btn" data-view="list" title="List View">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects Grid -->
+                    <div class="projects-grid-admin" id="projectsGridAdmin">
+                        <!-- Project cards will be loaded dynamically -->
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state hidden" id="projectsEmptyState">
+                        <div class="empty-icon">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <h3>No Projects Found</h3>
+                        <p>Get started by adding your first project.</p>
+                        <button class="btn btn-primary" id="addProjectBtnEmpty">
+                            <i class="fas fa-plus"></i> Add Project
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     Skills Page
+                     ========================================== -->
+                <div class="page" id="skillsPage">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Manage Skills</h1>
+                            <p>Update your skills and proficiency levels.</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary" id="addCategoryBtn">
+                                <i class="fas fa-folder-plus"></i> Add Category
+                            </button>
+                            <button class="btn btn-primary" id="addSkillBtn">
+                                <i class="fas fa-plus"></i> Add New Skill
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="skills-management" id="skillsManagement">
+                        <!-- Skills will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     Education Page
+                     ========================================== -->
+                <div class="page" id="educationPage">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Manage Education</h1>
+                            <p>Update your educational background and certifications.</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" id="addEducationBtn">
+                                <i class="fas fa-plus"></i> Add Education
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="education-list" id="educationList">
+                        <!-- Education items will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     Messages Page
+                     ========================================== -->
+                <div class="page" id="messagesPage">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Messages</h1>
+                            <p>View and manage contact form submissions.</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary" id="markAllReadBtn">
+                                <i class="fas fa-check-double"></i> Mark All Read
+                            </button>
+                            <button class="btn btn-danger" id="deleteSelectedBtn" disabled>
+                                <i class="fas fa-trash"></i> Delete Selected
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="messages-container">
+                        <div class="messages-sidebar" id="messagesSidebar">
+                            <!-- Messages list will be loaded dynamically -->
+                        </div>
+                        <div class="message-detail-container" id="messageDetail">
+                            <!-- Message detail will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     Analytics Page
+                     ========================================== -->
+                <div class="page" id="analyticsPage">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Analytics</h1>
+                            <p>Track your portfolio performance and visitor statistics.</p>
+                        </div>
+                        <div class="page-actions">
+                            <select id="analyticsPeriod" class="filter-select">
+                                <option value="7">Last 7 Days</option>
+                                <option value="30" selected>Last 30 Days</option>
+                                <option value="90">Last 90 Days</option>
+                                <option value="365">Last Year</option>
+                            </select>
+                            <button class="btn btn-secondary" id="exportAnalytics">
+                                <i class="fas fa-download"></i> Export Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="analytics-content" id="analyticsContent">
+                        <!-- Analytics will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     Profile Page
+                     ========================================== -->
+                <div class="page" id="profilePage">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>My Profile</h1>
+                            <p>Manage your personal information and portfolio details.</p>
+                        </div>
+                    </div>
+
+                    <div id="profileContainer">
+                        <!-- Profile will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     Settings Page
+                     ========================================== -->
+                <div class="page" id="settingsPage">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Settings</h1>
+                            <p>Configure your website and account settings.</p>
+                        </div>
+                    </div>
+
+                    <div id="settingsContainer">
+                        <!-- Settings will be loaded dynamically -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- End of page-content -->
+        </main>
+        <!-- End of main-content -->
+    </div>
+    <!-- End of admin-panel -->
+
+    <!-- ==========================================
+         Modals
+         ========================================== -->
+
+    <!-- Add/Edit Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="projectModalTitle">Add New Project</h3>
+                <button class="modal-close" data-close="projectModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="projectForm">
+                    <input type="hidden" id="projectId">
+                    <div class="form-tabs">
+                        <button type="button" class="form-tab active" data-tab="basic">Basic Info</button>
+                        <button type="button" class="form-tab" data-tab="details">Details</button>
+                        <button type="button" class="form-tab" data-tab="media">Media</button>
+                    </div>
+
+                    <!-- Basic Info Tab -->
+                    <div class="form-tab-content active" id="basicTab">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="projectTitle">Project Title *</label>
+                                <input type="text" id="projectTitle" name="title" required
+                                    placeholder="Enter project title">
+                            </div>
+                            <div class="form-group">
+                                <label for="projectCategory">Category *</label>
+                                <select id="projectCategory" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="web">Web Development</option>
+                                    <option value="mobile">Mobile App</option>
+                                    <option value="uiux">UI/UX Design</option>
+                                    <option value="research">Research</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectDescription">Short Description *</label>
+                            <textarea id="projectDescription" name="description" rows="3" required
+                                placeholder="Brief description of the project"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="projectStatus">Status</label>
+                                <select id="projectStatus" name="status">
+                                    <option value="active">Active</option>
+                                    <option value="draft">Draft</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectDate">Date</label>
+                                <input type="date" id="projectDate" name="date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Details Tab -->
+                    <div class="form-tab-content" id="detailsTab">
+                        <div class="form-group">
+                            <label for="projectFullDescription">Full Description</label>
+                            <textarea id="projectFullDescription" name="fullDescription" rows="6"
+                                placeholder="Detailed description of the project"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectTechnologies">Technologies Used</label>
+                            <input type="text" id="projectTechnologies" name="technologies"
+                                placeholder="e.g., React, Node.js, MongoDB (comma separated)">
+                            <div class="tech-tags" id="techTags"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectFeatures">Key Features</label>
+                            <textarea id="projectFeatures" name="features" rows="4"
+                                placeholder="List key features (one per line)"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="projectLiveUrl">Live URL</label>
+                                <input type="url" id="projectLiveUrl" name="liveUrl" placeholder="https://example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="projectGithubUrl">GitHub URL</label>
+                                <input type="url" id="projectGithubUrl" name="githubUrl"
+                                    placeholder="https://github.com/username/repo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Tab -->
+                    <div class="form-tab-content" id="mediaTab">
+                        <div class="form-group">
+                            <label>Project Thumbnail</label>
+                            <div class="image-upload-area" id="thumbnailUpload">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Drag & drop image here or click to upload</p>
+                                    <span>PNG, JPG up to 5MB</span>
+                                </div>
+                                <input type="file" id="thumbnailInput" accept="image/*" hidden>
+                                <div class="upload-preview" id="thumbnailPreview"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Project Screenshots</label>
+                            <div class="image-upload-area multiple" id="screenshotsUpload">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-images"></i>
+                                    <p>Add project screenshots</p>
+                                    <span>Up to 5 images</span>
+                                </div>
+                                <input type="file" id="screenshotsInput" accept="image/*" multiple hidden>
+                                <div class="upload-preview-grid" id="screenshotsPreview"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectIcon">Icon (Font Awesome class)</label>
+                            <div class="icon-selector">
+                                <input type="text" id="projectIcon" name="icon" placeholder="e.g., fa-shopping-cart">
+                                <div class="icon-preview">
+                                    <i class="fas fa-folder" id="iconPreview"></i>
+                                </div>
+                            </div>
+                            <div class="icon-suggestions" id="iconSuggestions">
+                                <button type="button" data-icon="fa-shopping-cart"><i
+                                        class="fas fa-shopping-cart"></i></button>
+                                <button type="button" data-icon="fa-tasks"><i class="fas fa-tasks"></i></button>
+                                <button type="button" data-icon="fa-graduation-cap"><i
+                                        class="fas fa-graduation-cap"></i></button>
+                                <button type="button" data-icon="fa-credit-card"><i
+                                        class="fas fa-credit-card"></i></button>
+                                <button type="button" data-icon="fa-brain"><i class="fas fa-brain"></i></button>
+                                <button type="button" data-icon="fa-blog"><i class="fas fa-blog"></i></button>
+                                <button type="button" data-icon="fa-mobile-alt"><i
+                                        class="fas fa-mobile-alt"></i></button>
+                                <button type="button" data-icon="fa-laptop-code"><i
+                                        class="fas fa-laptop-code"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Gradient Colors</label>
+                            <div class="color-pickers">
+                                <div class="color-picker-group">
+                                    <label>Start Color</label>
+                                    <input type="color" id="gradientStart" value="#6366f1">
+                                </div>
+                                <div class="color-picker-group">
+                                    <label>End Color</label>
+                                    <input type="color" id="gradientEnd" value="#ec4899">
+                                </div>
+                                <div class="gradient-preview" id="gradientPreview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-close="projectModal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveProjectBtn">
+                    <i class="fas fa-save"></i> Save Project
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Skill Modal -->
+    <div class="modal" id="skillModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="skillModalTitle">Add New Skill</h3>
+                <button class="modal-close" data-close="skillModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="skillForm">
+                    <input type="hidden" id="skillId">
+                    <div class="form-group">
+                        <label for="skillName">Skill Name *</label>
+                        <input type="text" id="skillName" name="name" required placeholder="e.g., JavaScript">
+                    </div>
+                    <div class="form-group">
+                        <label for="skillCategory">Category *</label>
+                        <select id="skillCategory" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="frontend">Frontend Development</option>
+                            <option value="backend">Backend Development</option>
+                            <option value="database">Database</option>
+                            <option value="mobile">Mobile Development</option>
+                            <option value="tools">Tools & Technologies</option>
+                            <option value="design">UI/UX Design</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="skillLevel">Proficiency Level: <span id="skillLevelValue">50%</span></label>
+                        <input type="range" id="skillLevel" name="level" min="0" max="100" value="50">
+                        <div class="skill-level-preview">
+                            <div class="skill-bar-preview">
+                                <div class="skill-fill-preview" id="skillFillPreview" style="width: 50%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="skillIcon">Icon (optional)</label>
+                        <input type="text" id="skillIcon" name="icon" placeholder="e.g., fab fa-js">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-close="skillModal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveSkillBtn">
+                    <i class="fas fa-save"></i> Save Skill
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Education Modal -->
+    <div class="modal" id="educationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="educationModalTitle">Add Education</h3>
+                <button class="modal-close" data-close="educationModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="educationForm">
+                    <input type="hidden" id="educationId">
+                    <div class="form-group">
+                        <label for="eduTitle">Title/Degree *</label>
+                        <input type="text" id="eduTitle" name="title" required
+                            placeholder="e.g., Bachelor of Science in Computer Science">
+                    </div>
+                    <div class="form-group">
+                        <label for="eduInstitution">Institution *</label>
+                        <input type="text" id="eduInstitution" name="institution" required
+                            placeholder="e.g., University of Juba">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eduStartDate">Start Date *</label>
+                            <input type="text" id="eduStartDate" name="startDate" required placeholder="e.g., 2021">
+                        </div>
+                        <div class="form-group">
+                            <label for="eduEndDate">End Date</label>
+                            <input type="text" id="eduEndDate" name="endDate" placeholder="e.g., 2025 or Present">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eduDescription">Description</label>
+                        <textarea id="eduDescription" name="description" rows="4"
+                            placeholder="Describe your education..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="eduCourses">Relevant Courses (comma separated)</label>
+                        <input type="text" id="eduCourses" name="courses"
+                            placeholder="e.g., Data Structures, Algorithms, Web Development">
+                    </div>
+                    <div class="form-group">
+                        <label for="eduType">Type</label>
+                        <select id="eduType" name="type">
+                            <option value="degree">Degree</option>
+                            <option value="certification">Certification</option>
+                            <option value="course">Course</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-close="educationModal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveEducationBtn">
+                    <i class="fas fa-save"></i> Save Education
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="modal" id="chatModal">
+        <div class="modal-content chat-modal-content">
+            <div class="modal-header">
+                <h3 id="chatModalTitle">Chat with Client</h3>
+                <button class="modal-close" data-close="chatModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="chat-history" id="chatHistory">
+                    <!-- Chat messages will be loaded here -->
+                </div>
+                <div class="chat-input-area">
+                    <textarea id="chatInput" placeholder="Type your reply..." rows="2"></textarea>
+                    <button class="btn btn-primary" id="sendChatBtn">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content small confirm-modal-content">
+            <div class="modal-header">
+                <h3 id="confirmModalTitle">Confirm Action</h3>
+                <button class="modal-close" data-close="confirmModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="confirm-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h4>Are you sure?</h4>
+                <p id="confirmModalMessage">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-close="confirmModal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Change Modal -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="modal-close" data-close="passwordModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" name="currentPassword" required
+                            placeholder="Enter current password">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" name="newPassword" required
+                            placeholder="Enter new password">
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthFill"></div>
+                            </div>
+                            <span class="strength-text" id="strengthText">Weak</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required
+                            placeholder="Confirm new password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-close="passwordModal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="savePasswordBtn">
+                    <i class="fas fa-save"></i> Update Password
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         Loading Overlay
+         ========================================== -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         Toast Container
+         ========================================== -->
+    <div class="toast-container" id="toastContainer">
+        <!-- Toasts will be added here dynamically -->
+    </div>
+    <!-- Add this BEFORE your admin.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../js/admin-script.js"></script>
+</body>
+
+</html>
