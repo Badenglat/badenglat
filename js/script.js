@@ -720,9 +720,6 @@ window.viewProjectDetails = viewProjectDetails;
 // ==========================================
 // Contact Form
 // ==========================================
-// ==========================================
-// Contact Form
-// ==========================================
 function initContactForm() {
     const form = document.getElementById('contactForm');
 
@@ -765,6 +762,13 @@ function initContactForm() {
             return;
         }
 
+        // Check if EmailJS is available
+        if (typeof emailjs === 'undefined') {
+            console.error('EmailJS library not loaded');
+            showNotification('Error: Email service not loaded. Please check your internet connection.', 'error');
+            return;
+        }
+
         // Show loading state
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitBtn.classList.add('loading');
@@ -774,9 +778,12 @@ function initContactForm() {
         const templateParams = {
             from_name: formData.name,
             from_email: formData.email,
-            subject: formData.subject,
+            email: formData.email,      // Fallback for some templates
+            reply_to: formData.email,   // Standard for reply-to
+            subject: `Portfolio Message: ${formData.subject}`, // Prefix to separate from Gmail threading
             message: formData.message,
-            to_name: 'Badeng Lat'
+            to_name: 'Badeng Lat',
+            to_email: 'badenglat@gmail.com' // Explicitly provide recipient address
         };
 
         // Send using EmailJS
@@ -820,7 +827,15 @@ function initContactForm() {
             function (error) {
                 console.error('FAILED...', error);
 
-                showNotification('Failed to send message. Please try again.', 'error');
+                // Extract useful error message
+                let errorMsg = 'Failed to send message.';
+                if (error.text) {
+                    errorMsg += ' ' + error.text;
+                } else if (error.message) {
+                    errorMsg += ' ' + error.message;
+                }
+
+                showNotification(errorMsg, 'error');
 
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.classList.remove('loading');
