@@ -720,10 +720,28 @@ window.viewProjectDetails = viewProjectDetails;
 // ==========================================
 // Contact Form
 // ==========================================
+// ==========================================
+// Contact Form
+// ==========================================
 function initContactForm() {
     const form = document.getElementById('contactForm');
 
     if (!form) return;
+
+    // Real-time validation on blur
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function () {
+            validateField(this);
+        });
+
+        // Clear error style on focus
+        input.addEventListener('focus', function () {
+            if (this.style.borderColor === 'var(--error)') {
+                this.style.borderColor = 'var(--primary)';
+            }
+        });
+    });
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -758,11 +776,10 @@ function initContactForm() {
             from_email: formData.email,
             subject: formData.subject,
             message: formData.message,
-            to_name: 'Badeng Lat' // Or your name
+            to_name: 'Badeng Lat'
         };
 
         // Send using EmailJS
-        // Note: We use emailjs.send instead of sendForm to have better control
         emailjs.send(
             EMAIL_CONFIG.serviceID,
             EMAIL_CONFIG.templateID,
@@ -779,47 +796,37 @@ function initContactForm() {
 
                 form.reset();
 
+                // Convert to FormData for saveContactMessage compatibility if needed
+                if (typeof saveContactMessage === 'function') {
+                    const dataObj = new FormData();
+                    dataObj.append('name', formData.name);
+                    dataObj.append('email', formData.email);
+                    dataObj.append('subject', formData.subject);
+                    dataObj.append('message', formData.message);
+                    saveContactMessage(dataObj);
+                }
+
                 // Reset field styles
-                const inputs = form.querySelectorAll('input, textarea');
                 inputs.forEach(input => {
                     input.style.borderColor = 'var(--border)';
                 });
 
                 setTimeout(function () {
                     submitBtn.innerHTML = originalBtnText;
-                    submitBtn.classList.remove('success');
                     submitBtn.disabled = false;
+                    submitBtn.classList.remove('success');
                 }, 3000);
             },
             function (error) {
                 console.error('FAILED...', error);
 
+                showNotification('Failed to send message. Please try again.', 'error');
+
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
-
-                let errorMsg = 'Failed to send message.';
-                if (EMAIL_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
-                    errorMsg += ' (Configuration Missing)';
-                }
-                showNotification(errorMsg, 'error');
             }
         );
-    });
-
-    // Real-time validation on blur
-    const inputs = form.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('blur', function () {
-            validateField(this);
-        });
-
-        // Clear error style on focus
-        input.addEventListener('focus', function () {
-            if (this.style.borderColor === 'var(--error)') {
-                this.style.borderColor = 'var(--primary)';
-            }
-        });
     });
 }
 
