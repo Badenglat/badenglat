@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initSmoothScroll();
     initImageErrorHandling();
     initParallaxEffect();
-    initImageErrorHandling();
-    initParallaxEffect();
+
 
     // Check if EmailJS is configured
     if (EMAIL_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
