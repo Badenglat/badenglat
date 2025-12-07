@@ -17,8 +17,23 @@ document.addEventListener('DOMContentLoaded', function () {
     initSmoothScroll();
     initImageErrorHandling();
     initParallaxEffect();
-    // initAdminIntegration(); // Function not defined
+    initImageErrorHandling();
+    initParallaxEffect();
+
+    // Check if EmailJS is configured
+    if (EMAIL_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
+        console.warn('EmailJS not configured. Contact form will not work.');
+    }
 });
+
+// ==========================================
+// EmailJS Configuration
+// ==========================================
+const EMAIL_CONFIG = {
+    serviceID: "YOUR_SERVICE_ID",   // Replace with your EmailJS Service ID
+    templateID: "YOUR_TEMPLATE_ID", // Replace with your EmailJS Template ID
+    publicKey: "YOUR_PUBLIC_KEY"    // Replace with your EmailJS Public Key
+};
 
 // ==========================================
 // Storage Keys for Admin Integration
@@ -738,13 +753,25 @@ function initContactForm() {
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
 
-        // Save to admin dashboard (localStorage)
-        const formDataObj = new FormData(form);
-        const saved = saveContactMessage(formDataObj);
+        // Prepare template parameters
+        const templateParams = {
+            from_name: formData.name,
+            from_email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            to_name: 'Badeng Lat' // Or your name
+        };
 
-        // Simulate form submission
-        setTimeout(function () {
-            if (saved) {
+        // Send using EmailJS
+        // Note: We use emailjs.send instead of sendForm to have better control
+        emailjs.send(
+            EMAIL_CONFIG.serviceID,
+            EMAIL_CONFIG.templateID,
+            templateParams
+        ).then(
+            function (response) {
+                console.log('SUCCESS!', response.status, response.text);
+
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
                 submitBtn.classList.remove('loading');
                 submitBtn.classList.add('success');
@@ -764,13 +791,21 @@ function initContactForm() {
                     submitBtn.classList.remove('success');
                     submitBtn.disabled = false;
                 }, 3000);
-            } else {
+            },
+            function (error) {
+                console.error('FAILED...', error);
+
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
-                showNotification('Failed to send message. Please try again.', 'error');
+
+                let errorMsg = 'Failed to send message.';
+                if (EMAIL_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
+                    errorMsg += ' (Configuration Missing)';
+                }
+                showNotification(errorMsg, 'error');
             }
-        }, 2000);
+        );
     });
 
     // Real-time validation on blur
